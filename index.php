@@ -1,6 +1,5 @@
 <?php
-$letters = "abcdefghijklmnopqrstuvwxyz";
-$special_characters = "!?()[]{}$&_-+*:=/|%@#^<>.,;";
+require_once __DIR__ . "/partials/functions.php";
 
 $password = "";
 $error_msg = "";
@@ -9,13 +8,7 @@ $old_pwd_length = 0;
 if (isset($_GET['pwd_length'])) {
   $pwd_length = $_GET['pwd_length'];
   if ($_GET['pwd_length'] >= 4) {
-    do {
-      $password .= $letters[rand(0, strlen($letters) - 1)];
-      if (strlen($password) < $pwd_length) $password .= strtoupper($letters[rand(0, strlen($letters) - 1)]);
-      if (strlen($password) < $pwd_length) $password .= $special_characters[rand(0, strlen($special_characters) - 1)];
-      if (strlen($password) < $pwd_length) $password .= rand(0, 9);
-    } while (strlen($password) < $pwd_length);
-    $password = str_shuffle($password);
+    $password = generatePassword($pwd_length);
     $old_pwd_length = $pwd_length;
     $error_msg = "";
 
