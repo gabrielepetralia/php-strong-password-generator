@@ -7,9 +7,10 @@ $old_pwd_length = 4;
 if (isset($_GET['pwd_length'])) {
   $pwd_length = $_GET['pwd_length'];
   $old_pwd_length = $pwd_length;
+  $password = generatePassword($pwd_length);
 
   session_start();
-  $_SESSION['pwd'] = generatePassword($pwd_length);
+  $_SESSION['pwd'] = $password;
   header('Location: ./pwd.php');
 }
 ?>
